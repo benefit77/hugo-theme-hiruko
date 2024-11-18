@@ -980,6 +980,7 @@ h3.aside-title {
   padding-top: 62.5%;
   background-size: contain;
   background-repeat: no-repeat;
+  background-position: center;
 }
 
 .about-me-text {
