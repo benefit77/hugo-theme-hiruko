@@ -1,0 +1,80 @@
+baseURL = "https://example.org/"
+languageCode = "zh-cn"
+title = "GENKUN"
+theme = "hiruko"
+
+[params]
+Paginate = 10
+archivePaginate = 100
+summaryLength = 150
+disqus = ""
+
+NavItems = [
+  ["HOME", "/"],
+  ["ARCHIVE", "/post"],
+  ["GALLERY", "/gallery"],
+  ["ABOUT", "/about"],
+  ["RSS", "/index.xml"]
+]
+
+[params.AboutMe]
+Motto = "Sometimes NAIVE."
+ImagePath = "/media/aboutme.jpg"
+AsideTitle = "FOLLOW ME"
+Links = [
+  ["github-link", "https://github.com/"],
+  ["twitter-link", "https://twitter.com/"],
+  ["weibo-link", "https://weibo.com/"]
+]
+
+[params.Copyright]
+Name = "Benefit77"
+From = "2024"
+To = "2024"
+
+[params.CDN.JQuery]
+Path = "/js/libs"
+Version = "3.2.1"
+
+[params.CDN.JQueryMouseWheel]
+Path = "/js/libs"
+Version = "3.1.13"
+
+[params.CDN.JQueryUI]
+Path = "/js/libs"
+Version = "1.12.1"
+
+[params.CDN.JQueryTocify]
+Path = "/js/libs"
+Version = "1.9.0"
+
+[params.CDN.FancyBox]
+Path = "/js/libs"
+Version = "3.0.47"
+
+[params.CDN.Bootstrap]
+Path = "/js/libs"
+Version = "3.3.7"
+
+[params.CDN.HighLight]
+Path = "//cdn.staticfile.org"
+Version = "9.13.1"
+
+[params.CDN.HighLightNum]
+Path = "//cdn.staticfile.org"
+Version = "2.5.0"
+
+[params.CDN.MathJax]
+Path = "//cdn.staticfile.org"
+Version = "2.7.5"
+
+[params.CDN.FontAwesome]
+Path = "/js/libs"
+Version = "4.7.0"
+
+[params.CDN.Pangu]
+Path = "/js/libs"
+Version = "3.3.0"
+
+[outputs]
+home = ["HTML", "RSS"]

@@ -1,0 +1,39 @@
+{{ partial "header.html" . }}
+<div class="wrap">
+	{{ partial "navbar.html" . }}
+	<main class="hiruko-container">
+		<div class="articles">
+			{{- $paginator := .Paginate (where .Site.RegularPages "Params.type" "post") .Site.Params.Paginate }}
+			{{- range $page := $paginator.Pages }}
+			<article class="post-block">
+				<h2 class="post-title">
+					<a href="{{ .Permalink }}" class="post-link">{{ $page.Title }}</a>
+				</h2>
+				<div class="post-info">{{ $page.Date.Format "Jan 2 2006" }}</div>
+				<div class="post-entry">
+					{{ if .Truncated }}
+						{{ .Summary }}
+					{{ else }}
+						{{ .Content | truncate (.Site.Params.summaryLength | default 150) }}
+					{{ end }}
+				</div>
+				<div class="post-meta">
+					<a href="{{ .Permalink }}" class="article-more">CONTINUE READING</a>
+					<div class="post-tags-box">
+					{{ with $page.Params.tags }}
+						{{ range $id, $name := $page.Params.tags }}
+						{{ if $id }},{{ end }}
+						<a class="tag-link" href="/tags/{{ $name | urlize }}">{{ $name }}</a>
+						{{ end }}
+					{{ end }}
+					</div>
+				</div>
+			</article>
+		{{- end }}
+		</div>
+		{{ partial "pagination.html" . }}
+	</main>
+</div>
+
+{{ partial "footer.html" . }}
+{{ partial "after-footer.html" . }}
