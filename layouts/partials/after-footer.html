@@ -58,7 +58,7 @@
 <script async type="text/javascript" src="{{ $.Site.Params.CDN.MathJax.Path }}/mathjax/{{ $.Site.Params.CDN.MathJax.Version }}/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
 {{- end }}
 
-{{- if eq .Params.comments true }}
+{{- if and .Params.comments (ne .Site.Params.disqus "") }}
 <script>
     var url_parts = window.location.href.split("?");
     var disqus_url = url_parts[0];
@@ -67,7 +67,7 @@
         dsq.type = 'text/javascript';
         dsq.async = true;
         dsq.src = "//{{ .Site.Params.disqus }}.disqus.com/embed.js";
-        (document.head || d.body).appendChild(dsq);
+        (document.head || document.body).appendChild(dsq);
     })();
 </script>
 {{- end }}
