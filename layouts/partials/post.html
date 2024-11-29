@@ -30,7 +30,7 @@
   {{ end }}
 </div>
 
-{{ if eq .Params.comments true }}
+{{- if and .Params.comments (ne .Site.Params.disqus "") }}
 <div class="disqus-comments">
   <div class="comments">
     <div id="disqus_thread"></div>
