@@ -71,33 +71,37 @@
     //     (document.head || document.body).appendChild(dsq);
     // })();
     let disqusjs = null;
-    // 初始化 DisqusJS 实例
-    disqusjs = new DisqusJS({
-        shortname: 'benefit-1',
-        api: 'https://disqusjs-proxy.651156.xyz/',
-        apikey: 'C2oQ41OAiRWbq39sQsTlwuWg83whelyC4eJAa4DVwRUA7un1CyZ1dTXqLNDqierG',
-        identifier: '{{ .RelPermalink }}',
-        url: '{{ .Permalink }}',
-        title: '{{ .Title }}',
-        admin: 'disqus_eptloXX64C',
-        nocomment: '这里冷冷清清的，一条评论都没有'
-    });
-    // 将 DisqusJS 渲染到页面上
-    disqusjs.render(document.getElementById('disqusjs'));
+    const disqusjsElement = document.getElementById('disqusjs');
+
+    function initDisqus() {
+        const permalink = disqusjsElement.dataset.permalink;
+        const relpermalink = disqusjsElement.dataset.relpermalink;
+        const title = disqusjsElement.dataset.title;
+
+        disqusjs = new DisqusJS({
+            shortname: 'benefit-1',
+            api: 'https://disqusjs-proxy.651156.xyz/',
+            apikey: 'C2oQ41OAiRWbq39sQsTlwuWg83whelyC4eJAa4DVwRUA7un1CyZ1dTXqLNDqierG',
+            identifier: relpermalink,
+            url: permalink,
+            title: title,
+            admin: 'disqus_eptloXX64C',
+            nocomment: '这里冷冷清清的，一条评论都没有'
+        });
+
+        disqusjs.render(disqusjsElement);
+    }
+
+    initDisqus();
 
     document.addEventListener('pjax:send', () => {
-        // 销毁 DisqusJS 实例
-        disqusjs.destroy();
+        if (disqusjs) {
+            disqusjs.destroy();
+        }
     });
 
     document.addEventListener('pjax:complete', () => {
-    // 使用新的参数（如新的 identifier 和 url）创建全新的 DisqusJS 实例
-    disqusjs = new DisqusJS({
-        identifier: '{{ .RelPermalink }}',
-        url: '{{ .Permalink }}'
-    });
-    // 渲染新的 DisqusJS
-    disqusjs.render(document.getElementById('disqusjs'));
+        initDisqus();
     });
 </script>
 {{- end }}
