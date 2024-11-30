@@ -75,22 +75,20 @@
         dsq.type = 'text/javascript';
         dsq.async = true;
         // dsq.src = "//{{ .Site.Params.disqus }}.disqus.com/embed.js";
-
-        dsq.onload = function() {
-            // Disqus 脚本加载完成后执行
-            const disqusjs = new DisqusJS({
-                shortname: 'benefit-1',
-                title: '{{ .Title }}',
-                identifier: '{{ .RelPermalink }}',
-                url: '{{ .Permalink }}',
-                api: 'https://disqusjs-proxy.651156.xyz/',
-                apikey: 'C2oQ41OAiRWbq39sQsTlwuWg83whelyC4eJAa4DVwRUA7un1CyZ1dTXqLNDqierG',
-                admin: 'disqus_eptloXX64C',
-                nocomment: '这里冷冷清清的，一条评论都没有'
-            });
-            disqusjs.render(document.getElementById('disqusjs'));
-        };
         (document.head || document.body).appendChild(dsq);
+
+        // Disqus 脚本加载完成后执行
+        const disqusjs = new DisqusJS({
+            shortname: 'benefit-1',
+            title: '{{ .Title }}',
+            identifier: '{{ .RelPermalink }}',
+            url: '{{ .Permalink }}',
+            api: 'https://disqusjs-proxy.651156.xyz/',
+            apikey: 'C2oQ41OAiRWbq39sQsTlwuWg83whelyC4eJAa4DVwRUA7un1CyZ1dTXqLNDqierG',
+            admin: 'disqus_eptloXX64C',
+            nocomment: '这里冷冷清清的，一条评论都没有'
+        });
+        disqusjs.render(document.getElementById('disqusjs'));
     })();
 </script>
 {{- end }}
