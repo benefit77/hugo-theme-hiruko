@@ -93,7 +93,7 @@
     disqusjs = new DisqusJS({
         identifier: disqus_url,
         url: '{{ .Permalink }}',
-        title: '{{ $page.Title }}',
+        title: '{{ $page.Title }}'
     });
     // 渲染新的 DisqusJS
     disqusjs.render(document.getElementById('disqusjs'));
