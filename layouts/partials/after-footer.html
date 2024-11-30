@@ -1,6 +1,5 @@
 <script src="https://unpkg.luckincdn.com/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js"></script>
 <script>addBackToTop()</script>
-<script src="https://cdn.bootcdn.net/ajax/libs/jquery.pjax/2.0.1/jquery.pjax.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/disqusjs@3.0/dist/browser/disqusjs.es2015.umd.min.js"></script>
 <script src="/js/scripts.js"></script>
 {{- if eq .Params.image true }}
@@ -71,41 +70,42 @@
     //     dsq.src = "//{{ .Site.Params.disqus }}.disqus.com/embed.js";
     //     (document.head || document.body).appendChild(dsq);
     // })();
-    let disqusjs = null;
-    // 初始化 DisqusJS 实例
-    disqusjs = new DisqusJS({
-        shortname: 'benefit-1',
-        title: '{{ .Title }}',
-        identifier: '{{ .RelPermalink }}',
-        url: '{{ .Permalink }}',
-        api: 'https://disqusjs-proxy.651156.xyz/',
-        apikey: 'C2oQ41OAiRWbq39sQsTlwuWg83whelyC4eJAa4DVwRUA7un1CyZ1dTXqLNDqierG',
-        admin: 'disqus_eptloXX64C',
-        nocomment: '这里冷冷清清的，一条评论都没有'
-    });
-    // 将 DisqusJS 渲染到页面上
-    disqusjs.render(document.getElementById('disqusjs'));
-
-    document.addEventListener('pjax:send', () => {
-        // 销毁 DisqusJS 实例
-        disqusjs.destroy();
-    });
-
-    document.addEventListener('pjax:complete', () => {
-    // 使用新的参数（如新的 identifier 和 url）创建全新的 DisqusJS 实例
-    disqusjs = new DisqusJS({
-        shortname: 'benefit-1',
-        title: '{{ .Title }}',
-        identifier: '{{ .RelPermalink }}',
-        url: '{{ .Permalink }}',
-        api: 'https://disqusjs-proxy.651156.xyz/',
-        apikey: 'C2oQ41OAiRWbq39sQsTlwuWg83whelyC4eJAa4DVwRUA7un1CyZ1dTXqLNDqierG',
-        admin: 'disqus_eptloXX64C',
-        nocomment: '这里冷冷清清的，一条评论都没有'
-    });
-    // 渲染新的 DisqusJS
-    disqusjs.render(document.getElementById('disqusjs'));
-    });
+    (function () {
+        let disqusjs = null;
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        // dsq.src = "//{{ .Site.Params.disqus }}.disqus.com/embed.js";
+        (document.head || document.body).appendChild(dsq);
+        disqusjs = new DisqusJS({
+            shortname: 'benefit-1',
+            title: '{{ .Title }}',
+            identifier: '{{ .RelPermalink }}',
+            url: '{{ .Permalink }}',
+            api: 'https://disqusjs-proxy.651156.xyz/',
+            apikey: 'C2oQ41OAiRWbq39sQsTlwuWg83whelyC4eJAa4DVwRUA7un1CyZ1dTXqLNDqierG',
+            admin: 'disqus_eptloXX64C',
+            nocomment: '这里冷冷清清的，一条评论都没有'
+        });
+        disqusjs.render(document.getElementById('disqusjs'));
+        dsp.load = function() {
+            disqusjs.destroy();
+        }
+        dsq.onload = function() {
+            // Disqus 脚本加载完成后执行
+            const disqusjs = new DisqusJS({
+                shortname: 'benefit-1',
+                title: '{{ .Title }}',
+                identifier: '{{ .RelPermalink }}',
+                url: '{{ .Permalink }}',
+                api: 'https://disqusjs-proxy.651156.xyz/',
+                apikey: 'C2oQ41OAiRWbq39sQsTlwuWg83whelyC4eJAa4DVwRUA7un1CyZ1dTXqLNDqierG',
+                admin: 'disqus_eptloXX64C',
+                nocomment: '这里冷冷清清的，一条评论都没有'
+            });
+            disqusjs.render(document.getElementById('disqusjs'));
+        };
+    })();
 </script>
 {{- end }}
 
