@@ -74,9 +74,11 @@
     // 初始化 DisqusJS 实例
     disqusjs = new DisqusJS({
         shortname: 'benefit-1',
-        siteName: '{{ .Site.BaseURL }}',
         api: 'https://disqusjs-proxy.651156.xyz/',
         apikey: 'C2oQ41OAiRWbq39sQsTlwuWg83whelyC4eJAa4DVwRUA7un1CyZ1dTXqLNDqierG',
+        identifier: '{{ .RelPermalink }}',
+        url: '{{ .Permalink }}',
+        title: '{{ .Title }}',
         admin: 'disqus_eptloXX64C',
         nocomment: '这里冷冷清清的，一条评论都没有'
     });
@@ -92,8 +94,7 @@
     // 使用新的参数（如新的 identifier 和 url）创建全新的 DisqusJS 实例
     disqusjs = new DisqusJS({
         identifier: '{{ .RelPermalink }}',
-        url: '{{ .Permalink }}',
-        title: '{{ .Title }}'
+        url: '{{ .Permalink }}'
     });
     // 渲染新的 DisqusJS
     disqusjs.render(document.getElementById('disqusjs'));
