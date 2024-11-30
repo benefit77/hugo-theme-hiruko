@@ -70,8 +70,8 @@
     //     dsq.src = "//{{ .Site.Params.disqus }}.disqus.com/embed.js";
     //     (document.head || document.body).appendChild(dsq);
     // })();
-    disqusjs.destroy();
     let disqusjs = null;
+    disqusjs.destroy();
     // 初始化 DisqusJS 实例
     disqusjs = new DisqusJS({
         shortname: 'benefit-1',
