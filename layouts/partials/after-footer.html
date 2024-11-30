@@ -94,8 +94,14 @@
     document.addEventListener('pjax:complete', () => {
     // 使用新的参数（如新的 identifier 和 url）创建全新的 DisqusJS 实例
     disqusjs = new DisqusJS({
+        shortname: 'benefit-1',
+        title: '{{ .Title }}',
         identifier: '{{ .RelPermalink }}',
-        url: '{{ .Permalink }}'
+        url: '{{ .Permalink }}',
+        api: 'https://disqusjs-proxy.651156.xyz/',
+        apikey: 'C2oQ41OAiRWbq39sQsTlwuWg83whelyC4eJAa4DVwRUA7un1CyZ1dTXqLNDqierG',
+        admin: 'disqus_eptloXX64C',
+        nocomment: '这里冷冷清清的，一条评论都没有'
     });
     // 渲染新的 DisqusJS
     disqusjs.render(document.getElementById('disqusjs'));
