@@ -61,6 +61,8 @@
 
 {{- if and .Params.comments (ne .Site.Params.disqus "") }}
 <script>
+    // var url_parts = window.location.href.split("?");
+    // var disqus_url = url_parts[0];
     // (function () {
     //     var dsq = document.createElement('script');
     //     dsq.type = 'text/javascript';
@@ -87,13 +89,11 @@
     });
 
     document.addEventListener('pjax:complete', () => {
-    var url_parts = window.location.href.split("?");
-    var disqus_url = url_parts[0];
     // 使用新的参数（如新的 identifier 和 url）创建全新的 DisqusJS 实例
     disqusjs = new DisqusJS({
-        identifier: disqus_url,
+        identifier: '{{ .RelPermalink }}',
         url: '{{ .Permalink }}',
-        title: '{{ $page.Title }}'
+        title: '{{ .Title }}'
     });
     // 渲染新的 DisqusJS
     disqusjs.render(document.getElementById('disqusjs'));
