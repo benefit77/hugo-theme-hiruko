@@ -70,7 +70,9 @@
     //     dsq.src = "//{{ .Site.Params.disqus }}.disqus.com/embed.js";
     //     (document.head || document.body).appendChild(dsq);
     // })();
-    const disqusjs = new DisqusJS({
+    let disqusjs = null;
+    // 初始化 DisqusJS 实例
+    disqusjs = new DisqusJS({
         shortname: 'benefit-1',
         siteName: '',
         identifier: disqus_url,
@@ -81,7 +83,30 @@
         admin: '',
         adminLabel: ''
     });
+    // 将 DisqusJS 渲染到页面上
     disqusjs.render(document.getElementById('disqusjs'));
+
+    document.addEventListener('pjax:send', () => {
+        // 销毁 DisqusJS 实例
+        disqusjs.destroy();
+    });
+
+    document.addEventListener('pjax:complete', () => {
+    // 使用新的参数（如新的 identifier 和 url）创建全新的 DisqusJS 实例
+    disqusjs = new DisqusJS({
+        shortname: 'benefit-1',
+        siteName: '',
+        identifier: disqus_url,
+        url: url_parts,
+        title: '',
+        api: 'https://disqusjs-proxy.651156.xyz/',
+        apikey: 'C2oQ41OAiRWbq39sQsTlwuWg83whelyC4eJAa4DVwRUA7un1CyZ1dTXqLNDqierG',
+        admin: '',
+        adminLabel: ''
+    });
+    // 渲染新的 DisqusJS
+    disqusjs.render(document.getElementById('disqusjs'));
+    });
 </script>
 {{- end }}
 
