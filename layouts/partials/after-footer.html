@@ -70,39 +70,17 @@
     //     dsq.src = "//{{ .Site.Params.disqus }}.disqus.com/embed.js";
     //     (document.head || document.body).appendChild(dsq);
     // })();
-    let disqusjs = null;
-    const disqusjsElement = document.getElementById('disqusjs');
-
-    function initDisqus() {
-        const permalink = disqusjsElement.dataset.permalink;
-        const relpermalink = disqusjsElement.dataset.relpermalink;
-        const title = disqusjsElement.dataset.title;
-
-        disqusjs = new DisqusJS({
-            shortname: 'benefit-1',
-            api: 'https://disqusjs-proxy.651156.xyz/',
-            apikey: 'C2oQ41OAiRWbq39sQsTlwuWg83whelyC4eJAa4DVwRUA7un1CyZ1dTXqLNDqierG',
-            identifier: relpermalink,
-            url: permalink,
-            title: title,
-            admin: 'disqus_eptloXX64C',
-            nocomment: '这里冷冷清清的，一条评论都没有'
-        });
-
-        disqusjs.render(disqusjsElement);
-    }
-
-    initDisqus();
-
-    document.addEventListener('pjax:send', () => {
-        if (disqusjs) {
-            disqusjs.destroy();
-        }
+    const disqusjs = new DisqusJS({
+        shortname: 'benefit-1',
+        identifier: '{{ .RelPermalink }}',
+        url: '{{ .Permalink }}',
+        title: '{{ .Title }}',
+        api: 'https://disqusjs-proxy.651156.xyz/',
+        apikey: 'C2oQ41OAiRWbq39sQsTlwuWg83whelyC4eJAa4DVwRUA7un1CyZ1dTXqLNDqierG',
+        admin: 'disqus_eptloXX64C',
+        nocomment: '这里冷冷清清的，一条评论都没有'
     });
-
-    document.addEventListener('pjax:complete', () => {
-        initDisqus();
-    });
+    disqusjs.render(document.getElementById('disqusjs'));
 </script>
 {{- end }}
 
