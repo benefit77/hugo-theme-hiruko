@@ -61,8 +61,6 @@
 
 {{- if and .Params.comments (ne .Site.Params.disqus "") }}
 <script>
-    var url_parts = window.location.href.split("?");
-    var disqus_url = url_parts[0];
     // (function () {
     //     var dsq = document.createElement('script');
     //     dsq.type = 'text/javascript';
@@ -74,14 +72,11 @@
     // 初始化 DisqusJS 实例
     disqusjs = new DisqusJS({
         shortname: 'benefit-1',
-        siteName: '',
-        identifier: disqus_url,
-        url: url_parts,
-        title: '',
+        siteName: '{{ .Site.baseURL }}',
         api: 'https://disqusjs-proxy.651156.xyz/',
         apikey: 'C2oQ41OAiRWbq39sQsTlwuWg83whelyC4eJAa4DVwRUA7un1CyZ1dTXqLNDqierG',
-        admin: '',
-        adminLabel: ''
+        admin: 'disqus_eptloXX64C',
+        nocomment: '这里冷冷清清的，一条评论都没有'
     });
     // 将 DisqusJS 渲染到页面上
     disqusjs.render(document.getElementById('disqusjs'));
@@ -92,17 +87,13 @@
     });
 
     document.addEventListener('pjax:complete', () => {
+    var url_parts = window.location.href.split("?");
+    var disqus_url = url_parts[0];
     // 使用新的参数（如新的 identifier 和 url）创建全新的 DisqusJS 实例
     disqusjs = new DisqusJS({
-        shortname: 'benefit-1',
-        siteName: '',
         identifier: disqus_url,
-        url: url_parts,
-        title: '',
-        api: 'https://disqusjs-proxy.651156.xyz/',
-        apikey: 'C2oQ41OAiRWbq39sQsTlwuWg83whelyC4eJAa4DVwRUA7un1CyZ1dTXqLNDqierG',
-        admin: '',
-        adminLabel: ''
+        url: '{{ .Permalink }}',
+        title: '{{ $page.Title }}',
     });
     // 渲染新的 DisqusJS
     disqusjs.render(document.getElementById('disqusjs'));
