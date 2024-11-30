@@ -71,7 +71,6 @@
     //     (document.head || document.body).appendChild(dsq);
     // })();
     let disqusjs = null;
-    disqusjs.destroy();
     // 初始化 DisqusJS 实例
     disqusjs = new DisqusJS({
         shortname: 'benefit-1',
@@ -83,6 +82,7 @@
         admin: 'disqus_eptloXX64C',
         nocomment: '这里冷冷清清的，一条评论都没有'
     });
+    disqusjs.destroy();
     // 将 DisqusJS 渲染到页面上
     disqusjs.render(document.getElementById('disqusjs'));
 </script>
